@@ -1,0 +1,27 @@
+---
+resources:
+  - name: debian
+    type: docker-image
+    source:
+      repository: debian
+      tag: stable
+  - name: apt-cacher-git
+    type: git
+    source:
+      uri: https://github.com/jeremy-clerc/docker-aptcacher.git
+  - name: apt-cacher-image
+    type: docker-image
+    source:
+      repository: {{dockerhub_repository}}
+      username: {{dockerhub_username}}
+      password: {{dockerhub_password}}
+
+jobs:
+  - name: build
+    plan:
+      - get: debian
+        trigger: true
+      - get: apt-cacher-git
+        trigger: true
+      - put: apt-cacher-image
+        params: {build: apt-cacher-git, tag_as_latest: true}
