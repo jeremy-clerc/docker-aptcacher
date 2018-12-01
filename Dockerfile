@@ -8,4 +8,4 @@ EXPOSE 3142
 
 USER www-data:www-data
 
-ENTRYPOINT ["/usr/sbin/apt-cacher", "daemon_port=3142", "distinct_namespaces=1", "allowed_hosts='*'"]
+ENTRYPOINT ["/usr/sbin/apt-cacher", "daemon_port=3142", "distinct_namespaces=1", "allowed_hosts=*"]
